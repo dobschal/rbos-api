@@ -15,8 +15,7 @@ public class XDCResourceTest {
                 .when()
                 .get("/api/v1/xdcs")
                 .then()
-                .statusCode(200)
-                .body(is("Hello XDC"));
+                .statusCode(200);
     }
 
     @Test

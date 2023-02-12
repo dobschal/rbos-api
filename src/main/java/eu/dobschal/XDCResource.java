@@ -23,17 +23,25 @@ public class XDCResource {
     XDCMapper xdcMapper;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getAll() {
-        return "Hello XDC";
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        List<XDCDTO> xdcdtos = xdcMapper.toDtos(xdcService.getAll());
+        LOG.infov("Get all XDCs: {0}", xdcdtos);
+        return Response.ok(xdcdtos).build();
     }
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(XDCDTO xdcRecord) {
-        List<XDCDTO> xdcdtos = xdcMapper.toDtos(xdcService.getAll());
-        LOG.infov("Yeah: {0}", xdcdtos);
-        return Response.ok().status(201).build();
+        // TODO: validate input properties
+        LOG.infov("Save XDC: {0}", xdcRecord);
+        try {
+            xdcService.save(xdcMapper.toEntity(xdcRecord));
+            return Response.ok().status(201).build();
+        } catch (Exception e) {
+            //  TODO: better error handling
+            return Response.serverError().build();
+        }
     }
 }
