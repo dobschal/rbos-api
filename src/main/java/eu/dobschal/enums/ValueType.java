@@ -1,4 +1,6 @@
-package eu.dobschal.entity;
+package eu.dobschal.enums;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ValueType {
     String ("string"),
@@ -13,11 +15,16 @@ public enum ValueType {
         name = s;
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equals(String otherName) {
         return name.equals(otherName);
     }
 
     public String toString() {
         return this.name;
+    }
+
+    @JsonValue
+    public String getName() {
+        return name;
     }
 }

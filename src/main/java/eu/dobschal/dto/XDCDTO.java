@@ -1,6 +1,7 @@
 package eu.dobschal.dto;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package eu.dobschal.mapper;
 
 import eu.dobschal.dto.XDCDTO;
 import eu.dobschal.dto.XDCPropertyDTO;
-import eu.dobschal.entity.ValueType;
+import eu.dobschal.enums.ValueType;
 import eu.dobschal.entity.XDCEntity;
 import eu.dobschal.entity.XDCPropertyEntity;
 import org.mapstruct.*;
