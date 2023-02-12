@@ -14,6 +14,7 @@ import java.util.List;
 // TODO: add PATCH route
 // TODO: add exception handler and custom exceptions
 // TODO: use id instead of name as identifier?
+// TODO: add filter, query and sort to GET route
 
 @Path("/api/v1/xdcs")
 public class XDCResource {
