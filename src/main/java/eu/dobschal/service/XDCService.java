@@ -1,7 +1,6 @@
 package eu.dobschal.service;
 
 import eu.dobschal.entity.XDCEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;

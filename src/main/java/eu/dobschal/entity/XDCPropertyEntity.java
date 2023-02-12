@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+
 
 @Getter
 @Setter
@@ -18,6 +21,6 @@ public class XDCPropertyEntity extends PanacheEntity {
 
     String value;
 
-    // TODO: use enum
-    String valueType;
+    @Enumerated(EnumType.STRING)
+    ValueType valueType;
 }

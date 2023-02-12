@@ -25,22 +25,25 @@ public class XDCResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        List<XDCDTO> xdcdtos = xdcMapper.toDtos(xdcService.getAll());
-        LOG.infov("Get all XDCs: {0}", xdcdtos);
-        return Response.ok(xdcdtos).build();
+        List<XDCDTO> xdcDtos = xdcMapper.toDtos(xdcService.getAll());
+        return Response.ok(xdcDtos).build();
     }
+
+    // TODO: add get by id
+
+    // TODO: add update route
+
+    // TODO: add delete route
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(XDCDTO xdcRecord) {
         // TODO: validate input properties
-        LOG.infov("Save XDC: {0}", xdcRecord);
         try {
             xdcService.save(xdcMapper.toEntity(xdcRecord));
             return Response.ok().status(201).build();
         } catch (Exception e) {
-            //  TODO: better error handling
             return Response.serverError().build();
         }
     }
