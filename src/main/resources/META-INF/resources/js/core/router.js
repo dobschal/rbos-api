@@ -1,9 +1,6 @@
 /**
- * @typedef {{string: () => HTMLElement}} RoutingConfig
+ * @typedef {{string: (any) => HTMLElement}} RoutingConfig
  */
-
-/** @type {HTMLElement} */
-let _activePage;
 
 /** @type {RoutingConfig} */
 let _routingConfig = {};
@@ -23,12 +20,12 @@ export function navigateTo(url) {
     applyRouting();
 }
 
+/**
+ * This will update the page based on the given URL and routing config.
+ */
 export function applyRouting() {
-    if(_activePage instanceof HTMLElement) {
-        _activePage.parentNode.removeChild(_activePage);
-    }
-    _activePage = _activePageFromUrl();
-    document.body.append(_activePage);
+    document.body.innerHTML = "";
+    document.body.append(_activePageFromUrl());
 }
 
 /**
@@ -38,7 +35,7 @@ export function applyRouting() {
 function _activePageFromUrl() {
     const pathParts = window.location.pathname.split("/").filter(s => s);
     if(pathParts.length === 0) {
-        return _routingConfig["*"]();
+        return _routingConfig["/"]();
     }
     for(const key in _routingConfig) {
         const potentialPathParts = key.split("/").filter(s => s);
@@ -61,4 +58,11 @@ function _activePageFromUrl() {
         }
     }
     console.error("No matching page found for URL.");
+}
+
+/**
+ * Handle back button click.
+ */
+window.onpopstate = function(event) {
+    applyRouting();
 }

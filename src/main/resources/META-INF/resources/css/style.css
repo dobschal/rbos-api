@@ -1,36 +1,144 @@
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: #0b331c;
+    min-height: 100vh;
+    display: flex;
+}
+
+.icon-button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 24px 24px;
+    transition: transform 0.3s ease-out;
+}
+
+.icon-button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
 img {
     width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+img.loaded {
+    opacity: 1;
 }
 
-nav {
+label {
+    text-transform: uppercase;
+    color: #a3a3a3;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader {
+    width: 50px;
     height: 50px;
-    background-color: #00FD8D;
+    margin: auto;
+    border-radius: 50%;
+    border: solid 1px #3F3F3F;
+    border-bottom-color: transparent;
+    animation-name: rotate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(5vh);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0vh);
+    }
+}
+
+.page {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    min-height: 50vh;
+    animation-name: page-fade-in;
+    animation-timing-function: ease-out;
+    animation-iteration-count: 1;
+    animation-duration: 0.3s;
+}
+
+.page p {
+    margin: 0;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.page-header h2 {
+    margin: 0;
+    padding-right: 1rem;
+    line-height: 1.5rem;
+}
+
+.page-header button:first-child {
+    margin-left: -1rem;
+    margin-right: 1rem;
+}
+
+.row {
     display: flex;
     flex-direction: row;
 }
 
-nav h1 {
-    margin: 0;
-    line-height: 50px;
-    padding: 0 1rem;
+table {
+    border-spacing: 0;
 }
 
-nav a:link, nav a:visited {
-    line-height: 50px;
-    text-decoration: none;
-    color: rgba(0,0,0,0.8);
-    padding: 0 1rem;
+th {
+    border: none;
+    border-top: solid 1px #dddddd;
+    border-bottom: solid 1px #dddddd;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    color: #a3a3a3;
 }
 
-nav a:hover, nav a:active {
+td {
+    border: none;
+    border-bottom: solid 1px #dddddd;
+    padding: 1rem;
+}
+
+tr.clickable:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #F9F9F9;
 }
 
+.xdc-image {
+    width: 200px;
+}
+
+.xdc-property-list-item {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
