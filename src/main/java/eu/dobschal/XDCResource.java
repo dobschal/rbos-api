@@ -1,6 +1,7 @@
 package eu.dobschal;
 
 import eu.dobschal.dto.XDCDTO;
+import eu.dobschal.enums.TraitType;
 import eu.dobschal.mapper.XDCMapper;
 import eu.dobschal.service.XDCService;
 import org.jboss.logging.Logger;
@@ -40,6 +41,13 @@ public class XDCResource {
     public Response getByName(@PathParam("name") String name) {
         XDCDTO xdcDto = xdcMapper.toDto(xdcService.getByName(name));
         return Response.ok(xdcDto).build();
+    }
+
+    @GET
+    @Path("/trait-types")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTraitTypes() {
+        return Response.ok(TraitType.values()).build();
     }
 
     @DELETE

@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
@@ -5,6 +9,20 @@ body {
     color: #0b331c;
     min-height: 100vh;
     display: flex;
+}
+
+button {
+    background-color: #3e3e3e;
+    border: none;
+    padding: 0.33rem 1.5rem;
+    border-radius: 5px;
+    color: white;
+    transition: padding-right 1s ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+    padding-right: 5rem;
 }
 
 .icon-button {
@@ -16,11 +34,13 @@ body {
     background-position: 50% 50%;
     background-size: 24px 24px;
     transition: transform 0.3s ease-out;
+    padding: 0;
 }
 
 .icon-button:hover {
     cursor: pointer;
     transform: scale(1.2);
+    padding: 0;
 }
 
 img {
@@ -32,11 +52,29 @@ img.loaded {
     opacity: 1;
 }
 
+input {
+    padding: 0.33rem 0.5rem;
+    border: solid #dddddd 1px;
+    border-radius: 3px;
+    width: 100%;
+    display: block;
+    max-width: 320px;
+}
+
+input::placeholder {
+    color: #cccccc;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
 label {
     text-transform: uppercase;
-    color: #a3a3a3;
-    letter-spacing: 1px;
+    color: #848484;
+    letter-spacing: 0.66px;
     font-size: 0.75rem;
+    display: block;
 }
 
 @keyframes rotate {
@@ -109,6 +147,23 @@ label {
     flex-direction: row;
 }
 
+select {
+    appearance: none;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    height: 30px;
+    background-color: #fff;
+    background-image: url("data:image/png;base64,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");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    padding: 2px 30px 2px 8px;
+    position: relative;
+    line-height: 23px;
+    width: 100%;
+    max-width: 320px;
+}
+
 table {
     border-spacing: 0;
 }
@@ -141,4 +196,9 @@ tr.clickable:hover {
 .xdc-property-list-item {
     margin-bottom: 1rem;
     margin-right: 1rem;
+}
+
+.xdc-property-input {
+    padding-top: 1rem;
+    margin-bottom: 2rem;
 }

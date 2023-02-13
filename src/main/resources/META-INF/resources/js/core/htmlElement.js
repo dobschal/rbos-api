@@ -7,6 +7,7 @@
  * @property {{string: string}} [attributes]
  * @property {{string: (Event) => void}} [events]
  * @property {string} [cssClass]
+ * @property {() => void} [after]
  */
 
 /**
@@ -30,6 +31,9 @@ export function htmlElement(config = {}) {
     }
     if(typeof config.cssClass === "string") {
         element.className = config.cssClass;
+    }
+    if(typeof config.after === "function") {
+        config.after.call(element);
     }
     return element;
 }
