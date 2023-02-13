@@ -1,5 +1,5 @@
-import {htmlElement} from "../core/htmlElement.js";
-import {applyRouting} from "../core/router.js";
+import {htmlElement} from "../htmlElement.js";
+import {applyRouting} from "../router.js";
 
 /**
  * @param {string} text

@@ -6,6 +6,7 @@
  * @property {Array<HTMLElement>} [children]
  * @property {{string: string}} [attributes]
  * @property {{string: (Event) => void}} [events]
+ * @property {string} [cssClass]
  */
 
 /**
@@ -26,6 +27,9 @@ export function htmlElement(config = {}) {
         Object.keys(config.events).forEach(key => {
             element.addEventListener(key, config.events[key]);
         });
+    }
+    if(typeof config.cssClass === "string") {
+        element.className = config.cssClass;
     }
     return element;
 }

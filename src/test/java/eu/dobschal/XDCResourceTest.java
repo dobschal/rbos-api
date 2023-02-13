@@ -9,6 +9,8 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class XDCResourceTest {
 
+    // TODO: Add more tests
+
     @Test
     public void testGetAllXDCs() {
         given()

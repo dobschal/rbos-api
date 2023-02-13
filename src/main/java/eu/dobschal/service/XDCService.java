@@ -18,6 +18,10 @@ public class XDCService {
         xdcEntity.delete();
     }
 
+    public XDCEntity getByName(String name) {
+        return XDCEntity.find("name", name).firstResult();
+    }
+
     public List<XDCEntity> getAll() {
         return XDCEntity.listAll();
     }

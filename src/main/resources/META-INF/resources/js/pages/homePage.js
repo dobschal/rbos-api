@@ -1,24 +1,54 @@
 import {htmlElement} from "../core/htmlElement.js";
+import {container} from "../core/components/container.js";
+import {table} from "../core/components/table.js";
+import {tableHeadCell} from "../core/components/tableHeadCell.js";
+import {tableCell} from "../core/components/tableCell.js";
+import {tableRow} from "../core/components/tableRow.js";
+import {navigateTo} from "../core/router.js";
 
+/**
+ * @returns {HTMLElement}
+ */
 export function homePage() {
-    const list = htmlElement();
-    _renderList(list);
-    return htmlElement({
-        text: "Hey",
-        children: [list]
-    });
+    const tableWrapper = container();
+    _renderXdcList(tableWrapper);
+    return container([tableWrapper]);
 }
 
 /**
- * @param {HTMLElement} list
+ * @param {HTMLElement} tableWrapper
  * @returns {void}
  * @private
  */
-async function _renderList(list) {
+async function _renderXdcList(tableWrapper) {
+    const xdcs = await _loadXdcs();
+    tableWrapper.append(
+        table([
+            tableHeadCell("Name"),
+            tableHeadCell("Description"),
+            tableHeadCell("XDC")
+        ], xdcs.map(xdc => tableRow([
+            tableCell(xdc.name),
+            tableCell(xdc.description),
+            tableCell("+3°") // TODO: add XDC info
+        ], {
+            events: {
+                /**
+                 * @param {Event} e
+                 */
+                click(e) {
+                    navigateTo(`/xdcs/${xdc.name}`);
+                }
+            }
+        })))
+    );
+}
+
+/**
+ * @returns {Promise<Array<XDC>>}
+ * @private
+ */
+async function _loadXdcs() {
     const rawResponse = await fetch("/api/v1/xdcs");
-    const xdcs = await rawResponse.json();
-    console.log("Response: ", xdcs);
-    list.append(...xdcs.map(xdc => htmlElement({
-        text: xdc.name
-    })));
+    return await rawResponse.json();
 }

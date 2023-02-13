@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #0b331c;
+}
+
+img {
+    width: 100%;
+}
+
+nav {
+    height: 50px;
+    background-color: #00FD8D;
+    display: flex;
+    flex-direction: row;
+}
+
+nav h1 {
+    margin: 0;
+    line-height: 50px;
+    padding: 0 1rem;
+}
+
+nav a:link, nav a:visited {
+    line-height: 50px;
+    text-decoration: none;
+    color: rgba(0,0,0,0.8);
+    padding: 0 1rem;
+}
+
+nav a:hover, nav a:active {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+

@@ -34,6 +34,14 @@ public class XDCResource {
         return Response.ok(xdcDtos).build(); // TODO: have extendable response object
     }
 
+    @GET
+    @Path("/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByName(@PathParam("name") String name) {
+        XDCDTO xdcDto = xdcMapper.toDto(xdcService.getByName(name));
+        return Response.ok(xdcDto).build();
+    }
+
     @DELETE
     @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
