@@ -47,6 +47,44 @@ button:hover {
     padding-right: 5rem;
 }
 
+.dialog-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    display: flex;
+}
+
+.dialog-wrapper > * {
+    width: 240px;
+    min-height: 120px;
+    margin: auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.dialog-wrapper > * p {
+    margin: 0 0 1rem 0;
+}
+
+.dialog-wrapper > * button {
+    width: calc(50% - 0.5rem);
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.dialog-wrapper > * button:last-child {
+    margin-left: 1rem;
+}
+
+.dialog-wrapper > * button:hover {
+    padding-right: 0;
+}
+
 .error {
     color: red;
     margin-bottom: 1rem;
@@ -75,6 +113,7 @@ img {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
+
 img.loaded {
     opacity: 1;
 }

@@ -7,6 +7,9 @@ import {headline} from "../core/components/headline.js";
 import {iconButton} from "../core/components/iconButton.js";
 import {row} from "../core/components/row.js";
 import {label} from "../core/components/label.js";
+import {button} from "../core/components/button.js";
+import {navigateTo} from "../core/router.js";
+import {dialog} from "../core/dialog.js";
 
 /**
  * @param {{name: string}} params
@@ -15,16 +18,26 @@ import {label} from "../core/components/label.js";
 export function xdcDetailPage(params) {
     return asyncComponent(async () => {
         const xdc = await _loadXdc(params.name);
-        console.log("XDC: ", xdc, params);
         return container([
             _buildPageHeader(xdc),
             row([
                 container([
                     container([
                         label("Description"),
-                        textBlock(xdc.description)
+                        textBlock(xdc.description),
                     ], "xdc-property-list-item"),
-                    ...xdc.properties.flatMap(_renderXdcProperty)
+                    ...xdc.properties.flatMap(_renderXdcProperty),
+                    button(
+                        "Delete XDC",
+                        "secondary",
+                        "button",
+                        async () => {
+                            await dialog("Do you really want to delete the XDC?");
+                            await fetch(`/api/v1/xdcs/${xdc.name}`, {
+                                method: 'DELETE'
+                            });
+                            navigateTo("/");
+                        })
                 ]),
                 image(xdc.imageUri, {cssClass: "xdc-image"})
             ])
