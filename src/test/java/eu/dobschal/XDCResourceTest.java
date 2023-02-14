@@ -22,6 +22,7 @@ public class XDCResourceTest {
 
     @Test
     public void testPostXDC() {
+
         given()
                 .body("{\"title\": \"Bruce\", \"description\": \"Banner\", \"imageUri\": \"Banner\"}")
                 .header("Content-Type", "application/json")

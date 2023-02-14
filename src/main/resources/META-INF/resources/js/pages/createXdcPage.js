@@ -8,29 +8,34 @@ import {select} from "../core/components/select.js";
 import {form} from "../core/components/form.js";
 import {button} from "../core/components/button.js";
 import {navigateTo} from "../core/router.js";
+import {xdcPropertyInput} from "../components/xdcPropertyInput.js";
+import {observable} from "../core/observable.js";
 
 /**
  * @returns {HTMLElement}
  */
 export function createXdcPage() {
 
-    const xdc = {
+    const propertyList = container();
+    const errorContainer = container();
+
+    const xdc = observable({
         name: "",
         description: "",
         imageUri: "",
-        properties: [{
-            traitType: "",
-            value: ""
-        }]
-    };
+        properties: []
+    }, () => errorContainer.innerHTML = "");
 
     return asyncComponent(async () => {
         const traitTypes = await _loadTraitTypes();
         return container([
             _buildPageHeader(),
+            errorContainer,
             form( async() => {
-                // TODO: validate content
-                console.log("Post: ", xdc);
+                if(!xdc.name || !xdc.description || !xdc.properties || !xdc.imageUri) {
+                    _showError("Please enter valid information.", errorContainer);
+                    return;
+                }
                 await fetch("/api/v1/xdcs", {
                     method: 'POST',
                     headers: {
@@ -53,11 +58,22 @@ export function createXdcPage() {
                     labelText: "Image URI",
                     onChange: imageUri => xdc.imageUri = imageUri
                 }),
-                _buildPropertyInput(
-                    traitTypes,
-                    xdc.properties[0]
+                propertyList,
+                button(
+                    "Add Property",
+                    "secondary",
+                    "button",
+                    () => {
+                        const index = xdc.properties.length;
+                        xdc.properties.push(null);
+                        propertyList.append(
+                            xdcPropertyInput(
+                                traitTypes,
+                                (property) => {
+                                    xdc.properties[index] = property;
+                                }));
+                    }
                 ),
-                // TODO: Add more properties
                 button("Save")
             ])
         ], "page");
@@ -89,17 +105,16 @@ function _buildPageHeader() {
     });
 }
 
-function _buildPropertyInput(traitTypes, trait) {
-    return container([
-        select(
-            "Trait Type",
-            "Select Trait",
-            traitTypes,
-            traitType => trait.traitType = traitType
-        ),
-        input({
-            labelText: "Trait Value",
-            onChange: value => trait.value = value
+/**
+ * @param {string} text
+ * @param {HTMLElement} container
+ * @private
+ */
+function _showError(text, container) {
+    container.append(
+        htmlElement({
+            cssClass: "error",
+            text
         })
-    ], "xdc-property-input");
+    );
 }

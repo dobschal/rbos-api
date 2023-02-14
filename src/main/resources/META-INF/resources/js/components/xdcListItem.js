@@ -14,9 +14,6 @@ export function xdcListItem(xdc) {
     ], {
         cssClass: "clickable",
         events: {
-            /**
-             * @param {Event} e
-             */
             click(e) {
                 navigateTo(`/xdcs/${xdc.name}`);
             }
