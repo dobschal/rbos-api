@@ -9,6 +9,14 @@ import {textBlock} from "./components/textBlock.js";
  */
 export function dialog(text) {
     return new Promise((resolve, reject) => {
+
+        function close() {
+            element.style.opacity = "0";
+            setTimeout(() => {
+                element.parentNode.removeChild(element);
+            }, 500);
+        }
+
         const element = htmlElement({
             parent: document.body,
             cssClass: "dialog-wrapper",
@@ -16,7 +24,7 @@ export function dialog(text) {
                 container([
                     textBlock(text),
                     button("Cancel", "secondary", "button", () => {
-                        element.parentNode.removeChild(element);
+                        close();
                         reject();
                     }),
                     button("OK", "primary", "button", resolve)
