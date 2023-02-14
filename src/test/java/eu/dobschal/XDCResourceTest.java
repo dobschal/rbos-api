@@ -9,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 @QuarkusTest
 public class XDCResourceTest {
 
-    // TODO: Add more tests
+    // TODO: Setup H2 in memory database and add more tests
 
     @Test
     public void testGetAllXDCs() {
@@ -22,9 +22,8 @@ public class XDCResourceTest {
 
     @Test
     public void testPostXDC() {
-
         given()
-                .body("{\"title\": \"Bruce\", \"description\": \"Banner\", \"imageUri\": \"Banner\"}")
+                .body("{\"name\": \"Bruce\", \"description\": \"Banner\", \"imageUri\": \"Banner\", \"properties\": []}")
                 .header("Content-Type", "application/json")
                 .when()
                 .post("/api/v1/xdcs")

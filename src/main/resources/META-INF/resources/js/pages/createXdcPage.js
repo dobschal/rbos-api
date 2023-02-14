@@ -59,6 +59,7 @@ export function createXdcPage() {
                     onChange: imageUri => xdc.imageUri = imageUri
                 }),
                 propertyList,
+                // TODO: Allow removal of property
                 button(
                     "Add Property",
                     "secondary",
